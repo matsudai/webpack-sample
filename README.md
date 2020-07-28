@@ -8,16 +8,22 @@
 > npm install webpack webpack-cli --save-dev
 ```
 
-## 01 cliでコンパイルする
+## 01 cliでバンドルする
 
 ```bat
 > npx webpack
 > node .\dist\main.js
 ```
 
-## 02 コンパイル対象のファイル／出力されるファイルを指定する
+## 02 バンドル対象のファイル／出力されるファイルを指定する
 
 ```bat
 > npx webpack
 > node .\dist\index.js
 ```
+
+## 03 バンドルのモードをproductionに指定する
+
+モードを指定しない場合警告が出る。
+
+あとソースマップも生成する。

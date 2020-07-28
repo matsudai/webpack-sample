@@ -1,4 +1,9 @@
 module.exports = {
+  // 本番モードでバンドル
+  mode: 'production',
+  // DataUrlでソースマップを埋め込む
+  devtool: 'inline-source-map',
+
   // バンドルされるファイルパス
   entry: './src/app.js',
 
