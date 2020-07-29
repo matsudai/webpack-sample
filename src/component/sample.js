@@ -1,6 +1,6 @@
 const Sample = {
   show: () => {
-    console.log('wasabi');
+    document.getElementById('App').append('Hello');
   }
 };
 
