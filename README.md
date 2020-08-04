@@ -35,3 +35,10 @@
 ```
 
 -> src/index.htmlをブラウザで開く
+
+## 05 サーバを立てて公開する
+
+```bat
+> npm install --save-dev webpack-dev-server
+> npx webpack-dev-server
+```
