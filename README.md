@@ -48,3 +48,43 @@
 ```bat
 > npm install --save-dev  babel-loader @babel/core @babel/preset-env
 ```
+
+## 07 ESLintを導入する
+
+### (1) ESLintの拡張・モジュールのインストールと初期設定
+
+- VSCode拡張：`dbaeumer.vscode-eslint`
+- `.vscode/settings.json`
+
+※将来的にTypescriptを使いたいのでESLintの設定ファイルを生成する前にインストールする
+
+```bat
+> npm install --save-dev eslint typescript
+> npx eslint --init
+```
+
+- How would you like to use ESLint?                      : Lintの強さ（Airbnbを使うため`To check syntax, find problems, and enforce code style`）
+- What type of modules does your project use?            : モジュールの使い方（ES構文のため`Javascript modules (Import/Export)`
+- Which framework does your project use?                 : （なんとなくReact）
+- Does your project use TypeScript?                      : （Typescriptを使いたい）
+- Where does your code run?                              : （今はBrowserだけ、そのうちNodeも？）
+- How would you like to define a style for your project? : （`Use a popular style guide`）
+- Which style guide do you want to follow?               : （`Airbnb`）
+- What format do you want your config file to be in?     : 生成される設定ファイルのフォーマット
+
+```cmd
+>npx eslint --init
+√ How would you like to use ESLint? · style
+√ What type of modules does your project use? · esm
+√ Which framework does your project use? · react
+√ Does your project use TypeScript? · Yes
+√ Where does your code run? · browser
+√ How would you like to define a style for your project? · guide
+√ Which style guide do you want to follow? · airbnb
+√ What format do you want your config file to be in? · JavaScript
+Checking peerDependencies of eslint-config-airbnb@latest
+The config that you've selected requires the following dependencies:
+
+eslint-plugin-react@^7.20.0 @typescript-eslint/eslint-plugin@latest eslint-config-airbnb@latest eslint@^5.16.0 || ^6.8.0 || ^7.2.0 eslint-plugin-import@^2.21.2 eslint-plugin-jsx-a11y@^6.3.0 eslint-plugin-react-hooks@^4 || ^3 || ^2.3.0 || ^1.7.0 @typescript-eslint/parser@latest
+√ Would you like to install them now with npm? · Yes
+```
