@@ -42,3 +42,9 @@
 > npm install --save-dev webpack-dev-server
 > npx webpack-dev-server
 ```
+
+## 06 BabelでES6構文をトランスパイルする
+
+```bat
+> npm install --save-dev  babel-loader @babel/core @babel/preset-env
+```

@@ -33,6 +33,27 @@ module.exports = {
     })
   ],
 
+  // Loaderの設定
+  module: {
+    rules: [
+      // Babelの設定
+      {
+        // babelによるトランスパイル対象の指定
+        test: /\.js$/,
+        exclude: path.resolve(__dirname, 'node_modules'),
+        loader: 'babel-loader',
+        // babel/preset-env用の設定（.babelrcの代わり）
+        query: {
+          presets: [
+            [
+              '@babel/preset-env'
+            ]
+          ]
+        }
+      }
+    ]
+  },
+
   // webpack-dev-server用の設定
   devServer: {
     // document rootをpublic/にする

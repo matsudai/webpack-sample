@@ -1,6 +1,8 @@
 const Sample = {
   show: () => {
-    document.getElementById('App').append('Hello');
+    const hello = document.createElement('div');
+    hello.innerText = 'Hello';
+    document.getElementById('App').appendChild(hello);
   }
 };
 
