@@ -1,5 +1,5 @@
-path = require('path');
-HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // バンドルの設定
 module.exports = {
@@ -14,23 +14,33 @@ module.exports = {
 
   // バンドルされるファイルパス
   entry: {
-    'index': './src/index.js'
+    index: './src/index.js',
   },
 
-  // バンドルされたファイル
+  /**
+   * バンドル後のファイルの出力先
+   * - path: 出力先ディレクトリ
+   * - filename: 出力ファイル名
+   */
   output: {
-    path:     `${__dirname}/public`, // 出力先ディレクトリ
-    filename: '[name].bundle.js'     // ファイル名
+    path: `${__dirname}/public`, // 出力先ディレクトリ
+    filename: '[name].bundle.js', // ファイル名
   },
 
   plugins: [
-    // index.htmlをバンドルされたファイルと同じ場所に吐き出す
+    /**
+     * index.htmlをバンドルされたファイルと同じ場所に吐き出す
+     * - template: バンドル対象のhtml
+     * - chunks: バンドル対象のjs
+     * - inject: jsの読み込み位置
+     * - hash: ブラウザのキャッシュ対策のためにクエリパラメータにhashを付ける
+     */
     new HtmlWebpackPlugin({
       template: './src/index.html',
-      chunks:   'index',            // entryしたjsを読み込む
-      inject:   'head',             // jsは<head>タグ内で読み込む
-      hash:     true                // jsに一意なhashを指定する（キャッシュ対策）
-    })
+      chunks: 'index',
+      inject: 'head',
+      hash: true,
+    }),
   ],
 
   // Loaderの設定
@@ -38,25 +48,25 @@ module.exports = {
     rules: [
       // Babelの設定
       {
-        // babelによるトランスパイル対象の指定
         test: /\.js$/,
         exclude: path.resolve(__dirname, 'node_modules'),
         loader: 'babel-loader',
-        // babel/preset-env用の設定（.babelrcの代わり）
+        /**
+         * .babelrcの代わりに設定を記述する
+         * - presets: babel/preset-env: ES2015をトランスパイルする
+         */
         query: {
-          presets: [
-            [
-              '@babel/preset-env'
-            ]
-          ]
-        }
-      }
-    ]
+          presets: ['@babel/preset-env'],
+        },
+      },
+    ],
   },
 
-  // webpack-dev-server用の設定
+  /**
+   * webpack-dev-server用の設定
+   * - contentBase: / => ./public にマッピングする
+   */
   devServer: {
-    // document rootをpublic/にする
-    contentBase: path.resolve(__dirname, 'public')
-  }
-}
+    contentBase: path.resolve(__dirname, 'public'),
+  },
+};

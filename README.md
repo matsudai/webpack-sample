@@ -88,3 +88,12 @@ The config that you've selected requires the following dependencies:
 eslint-plugin-react@^7.20.0 @typescript-eslint/eslint-plugin@latest eslint-config-airbnb@latest eslint@^5.16.0 || ^6.8.0 || ^7.2.0 eslint-plugin-import@^2.21.2 eslint-plugin-jsx-a11y@^6.3.0 eslint-plugin-react-hooks@^4 || ^3 || ^2.3.0 || ^1.7.0 @typescript-eslint/parser@latest
 √ Would you like to install them now with npm? · Yes
 ```
+
+### (2) ESLint適用によるエラーの修正
+
+- VSCodeの下線が出ている箇所
+- AutoFixした結果コメントが読みづらくなった箇所
+
+```bat
+> npx eslint --fix .
+```
