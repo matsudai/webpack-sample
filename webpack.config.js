@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   // 本番モードでバンドル
   mode: 'production',
-  // DataUrlでソースマップを埋め込む
+  // ソースマップを出力する
   devtool: 'source-map',
 
   // // 開発モード、sourcemapの生成
@@ -46,9 +46,10 @@ module.exports = {
   // Loaderの設定
   module: {
     rules: [
+      // {test: /\.ts/, exclude: path.resolve(__dirname, 'node_modules'), loader: 'ts-loader' },
       // JavaScript
       {
-        test: /\.js$/,
+        test: /\.(js|ts)$/,
         exclude: path.resolve(__dirname, 'node_modules'),
         /**
          * JSのloaderを設定する（読み込み順は最後から）
@@ -60,27 +61,41 @@ module.exports = {
             loader: 'babel-loader',
             /**
              * .babelrcの代わりに設定を記述する
-             * - presets: babel/preset-env: ES2015をトランスパイルする
+             * - presets:
+             *     - @babel/preset-env: ES2015をトランスパイルする
+             *     - @babel/preset-typescript: TypeScriptを変換する
              */
             query: {
-              presets: ['@babel/preset-env'],
+              presets: ['@babel/preset-env', '@babel/preset-typescript'],
+              parserOpts: {
+                allowDeclareFields: true, // This will be enabled by default in Babel 8
+              },
             },
           },
-          {
-            loader: 'eslint-loader',
-            /**
-             * ESLint loaderの設定
-             * - cache: lint結果のキャッシュ
-             * - emitError: lintのエラーでバンドルを止めないためにlintのエラーを警告とする
-             */
-            options: {
-              cache: true,
-              emitWarning: true,
-            },
-          },
+          /**
+           * ESLintでは型チェックできないため外す。その代わりpackage.jsonにlintタスクを用意する
+           */
+          // {
+          //   loader: 'eslint-loader',
+          //   /**
+          //    * ESLint loaderの設定
+          //    * - emitError: lintのエラーでバンドルを止めないためにlintのエラーを警告とする
+          //    */
+          //   options: {
+          //     emitWarning: true,
+          //   },
+          // },
         ],
       },
     ],
+  },
+
+  /**
+   * モジュールの名前解決など
+   * - extensions: import時に推測する拡張子名
+   */
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
 
   /**

@@ -103,3 +103,27 @@ eslint-plugin-react@^7.20.0 @typescript-eslint/eslint-plugin@latest eslint-confi
 ```bat
 > npm install --save-dev eslint-loader
 ```
+
+## 08 TypeScriptを導入する
+
+- @babel/preset-typescript: babelのpresetで変換する
+- typescript-eslint: ESLintからLintするため
+- npm-run-all: ESLintでは型チェックできないためeslint-loaderを外す。その代わりpackage.jsonにlintタスクを用意する
+- eslint-watch: 上記のためeslintでコードを監視するためのモジュールを入れる
+
+```bat
+> npm install --save-dev @babel/preset-typescript typescript-eslint npm-run-all eslint-watch
+> npm uninstall eslint-loader
+```
+
+- 型チェック&ESLint
+
+```bat
+> npm run lint
+```
+
+- 上記をファイル監視しながら
+
+```bat
+> npm run lint-watch
+```
