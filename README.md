@@ -97,3 +97,9 @@ eslint-plugin-react@^7.20.0 @typescript-eslint/eslint-plugin@latest eslint-confi
 ```bat
 > npx eslint --fix .
 ```
+
+### (3) ESLintをバンドル時に適用する
+
+```bat
+> npm install --save-dev eslint-loader
+```

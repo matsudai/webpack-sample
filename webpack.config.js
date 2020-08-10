@@ -46,18 +46,39 @@ module.exports = {
   // Loaderの設定
   module: {
     rules: [
-      // Babelの設定
+      // JavaScript
       {
         test: /\.js$/,
         exclude: path.resolve(__dirname, 'node_modules'),
-        loader: 'babel-loader',
         /**
-         * .babelrcの代わりに設定を記述する
-         * - presets: babel/preset-env: ES2015をトランスパイルする
+         * JSのloaderを設定する（読み込み順は最後から）
+         * - [0] Babelのトランスパイル設定
+         * - [1] ESLintによるバンドル時警告の設定
          */
-        query: {
-          presets: ['@babel/preset-env'],
-        },
+        use: [
+          {
+            loader: 'babel-loader',
+            /**
+             * .babelrcの代わりに設定を記述する
+             * - presets: babel/preset-env: ES2015をトランスパイルする
+             */
+            query: {
+              presets: ['@babel/preset-env'],
+            },
+          },
+          {
+            loader: 'eslint-loader',
+            /**
+             * ESLint loaderの設定
+             * - cache: lint結果のキャッシュ
+             * - emitError: lintのエラーでバンドルを止めないためにlintのエラーを警告とする
+             */
+            options: {
+              cache: true,
+              emitWarning: true,
+            },
+          },
+        ],
       },
     ],
   },
